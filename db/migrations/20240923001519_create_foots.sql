@@ -2,7 +2,7 @@
 
 CREATE TABLE foots (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  acronym	VARCHAR(6)
+  name	VARCHAR(6)
 );
 
 -- migrate:down

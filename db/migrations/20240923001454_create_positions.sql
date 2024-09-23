@@ -2,8 +2,7 @@
 
 CREATE TABLE positions (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  acronym	VARCHAR(5),
-  name	VARCHAR(25)
+  name	VARCHAR(10)
 );
 
 -- migrate:down
