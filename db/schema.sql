@@ -1,82 +1,108 @@
 CREATE TABLE IF NOT EXISTS "schema_migrations" (version varchar(128) primary key);
-CREATE TABLE levels (
+CREATE TABLE play_styles (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   name	VARCHAR(30)
 );
-CREATE TABLE body_parts (
+CREATE TABLE sexs (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  name	VARCHAR(30)
+  name	VARCHAR(7)
 );
-CREATE TABLE exercises (
+CREATE TABLE nations (
+  id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name	VARCHAR(40)
+);
+CREATE TABLE positions (
+  id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name	VARCHAR(10)
+);
+CREATE TABLE foots (
+  id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name	VARCHAR(6)
+);
+CREATE TABLE leagues (
+  id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name	VARCHAR(30),
+  nation_id	INTEGER,
+  FOREIGN KEY (nation_id) REFERENCES nations (id)
+);
+CREATE TABLE teams (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   name	VARCHAR(40),
-  image_url VARCHAR(50),
-  video_url VARCHAR(80),
-  description TEXT,
-  body_part_id	INTEGER NOT NULL,
-  FOREIGN KEY (body_part_id) REFERENCES body_parts (id)
+  league_id	INTEGER NOT NULL,
+  FOREIGN KEY (league_id) REFERENCES leagues (id)
 );
-CREATE TABLE members (
+CREATE TABLE players (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  code	INTEGER,
-  dni	VARCHAR(8),
-  names VARCHAR(30),
-  last_names VARCHAR(45),
-  email VARCHAR(50),
-  phone VARCHAR(30),
-  image_url VARCHAR(50),
-  level_id	INTEGER NOT NULL,
-  FOREIGN KEY (level_id) REFERENCES levels (id)
+  name	VARCHAR(60),
+  rank INTEGER,
+  weak_foot INTEGER,
+  skill_moves INTEGER,
+  heigth INTEGER,
+  weight INTEGER,
+  url VARCHAR(120),
+  sex_id INTEGER NOT NULL,
+  position_id INTEGER NOT NULL,
+  nation_id	INTEGER NOT NULL,
+  team_id	INTEGER NOT NULL,
+  FOREIGN KEY (sex_id) REFERENCES sexs (id),
+  FOREIGN KEY (position_id) REFERENCES positions (id),
+  FOREIGN KEY (nation_id) REFERENCES nations (id)
+  FOREIGN KEY (team_id) REFERENCES teams (id)
 );
-CREATE TABLE users (
+CREATE TABLE common_details (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  user	VARCHAR(30),
-  password	VARCHAR(30),
-  member_id	INTEGER NOT NULL, activation_key VARCHAR(20), reset_key VARCHAR(20),
-  FOREIGN KEY (member_id) REFERENCES members (id)
+  overall INTEGER,
+  velocity INTEGER,
+  shooting INTEGER,
+  passing INTEGER,
+  dribbling INTEGER,
+  defending INTEGER,
+  physicality INTEGER,
+  player_id	INTEGER NOT NULL,
+  FOREIGN KEY (player_id) REFERENCES players (id)
 );
-CREATE TABLE exercises_members (
+CREATE TABLE goalkeeper_details (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  reps	INTEGER,
-  sets	INTEGER,
-  exercise_id	INTEGER NOT NULL,
-  member_id	INTEGER NOT NULL,
-  FOREIGN KEY (member_id) REFERENCES members (id),
-  FOREIGN KEY (exercise_id) REFERENCES exercises (id)
+  diving INTEGER,
+  handling INTEGER,
+  kicking INTEGER,
+  positioning INTEGER,
+  reflexes INTEGER,
+  player_id	INTEGER NOT NULL,
+  FOREIGN KEY (player_id) REFERENCES players (id)
 );
-CREATE TABLE months (
+CREATE TABLE players_play_styles (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  name	VARCHAR(15)
+  play_style_id	INTEGER NOT NULL,
+  player_id	INTEGER NOT NULL,
+  FOREIGN KEY (play_style_id) REFERENCES play_styles (id),
+  FOREIGN KEY (player_id) REFERENCES players (id)
 );
-CREATE TABLE years (
+CREATE TABLE players_positions (
   id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  name	INTEGER
-);
-CREATE TABLE periods (
-  id	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  year_id	INTEGER NOT NULL,
-  month_id	INTEGER NOT NULL,
-  FOREIGN KEY (month_id) REFERENCES months (id),
-  FOREIGN KEY (year_id) REFERENCES years (id)
+  position_id	INTEGER NOT NULL,
+  player_id	INTEGER NOT NULL,
+  FOREIGN KEY (position_id) REFERENCES positions (id),
+  FOREIGN KEY (player_id) REFERENCES players (id)
 );
 -- Dbmate schema migrations
 INSERT INTO "schema_migrations" (version) VALUES
-  ('20231021124813'),
-  ('20231021124919'),
-  ('20231021124936'),
-  ('20231021124945'),
-  ('20231021130012'),
-  ('20231021130222'),
-  ('20231021141030'),
-  ('20231021141253'),
-  ('20231021141727'),
-  ('20231021142140'),
-  ('20231021142351'),
-  ('20231021142401'),
-  ('20240110124333'),
-  ('20240110124343'),
-  ('20240110124422'),
-  ('20240110124429'),
-  ('20240110125344'),
-  ('20240110125501'),
-  ('20240401032045');
+  ('20240923001357'),
+  ('20240923001430'),
+  ('20240923001435'),
+  ('20240923001454'),
+  ('20240923001519'),
+  ('20240923001531'),
+  ('20240923001537'),
+  ('20240923001538'),
+  ('20240923001700'),
+  ('20240923001723'),
+  ('20240923001817'),
+  ('20240923001826'),
+  ('20240923014951'),
+  ('20240923015353'),
+  ('20240923020831'),
+  ('20240923023448'),
+  ('20240923023547'),
+  ('20240923031932'),
+  ('20240923052437');
