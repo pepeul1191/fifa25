@@ -39,11 +39,14 @@ CREATE TABLE players (
   skill_moves INTEGER,
   heigth INTEGER,
   weight INTEGER,
+  age INTEGER,
   url VARCHAR(120),
+  foot_id INTEGER NOT NULL,
   sex_id INTEGER NOT NULL,
   position_id INTEGER NOT NULL,
   nation_id	INTEGER NOT NULL,
   team_id	INTEGER NOT NULL,
+  FOREIGN KEY (foot_id) REFERENCES foots (id),
   FOREIGN KEY (sex_id) REFERENCES sexs (id),
   FOREIGN KEY (position_id) REFERENCES positions (id),
   FOREIGN KEY (nation_id) REFERENCES nations (id)
@@ -105,4 +108,5 @@ INSERT INTO "schema_migrations" (version) VALUES
   ('20240923023448'),
   ('20240923023547'),
   ('20240923031932'),
-  ('20240923052437');
+  ('20240923052437'),
+  ('20240929033656');
