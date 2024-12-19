@@ -65,12 +65,9 @@ https://www.googleapis.com/oauth2/v1/userinfo
 
 Archivo <b>.env</b>
 
-DB="sqlite:///db/demo.db"
-ENV="local"||"server"
-MAIL_PORT=465
-MAIL_USER="xyz@gmail.com"
-MAIL_PASS="asdfas"
-MAIL_HOST="smtp.google.com"
+DB="sqlite3:db/fifa25.db"
+DB_MYSQL="mysql://root:123@127.0.0.1:3306/oltp_fifa"
+DB_PG="postgres://root:123@127.0.0.1:5432/mart_olap_fifa?sslmode=disable"
 
 ### Migraciones
 

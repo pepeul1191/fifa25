@@ -10,7 +10,7 @@ INSERT INTO play_styles (id, name) VALUES (7, 'Tiki Taka+');
 INSERT INTO play_styles (id, name) VALUES (8, 'Aerial');
 INSERT INTO play_styles (id, name) VALUES (9, 'Bruiser');
 INSERT INTO play_styles (id, name) VALUES (10, 'Long Ball Pass');
-INSERT INTO play_styles (id, name) VALUES (11, 'Power Shot');
+INSERT INTO play_styles (id, name) VALUES (11, 'Power Shot'); -- tambien conocido como pulpo
 INSERT INTO play_styles (id, name) VALUES (12, 'Press Proven');
 INSERT INTO play_styles (id, name) VALUES (13, 'Acrobatic+');
 INSERT INTO play_styles (id, name) VALUES (14, 'Power Header');

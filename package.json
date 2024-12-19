@@ -10,7 +10,13 @@
     "start": "sirv public --no-clear",
     "dbmate:new": "npx dbmate -d \"db/migrations\" -e \"DB\" new ",
     "dbmate:up": "npx dbmate -d \"db/migrations\" -e \"DB\" up",
-    "dbmate:rollback": "npx dbmate -d \"db/migrations\" -e \"DB\" rollback"
+    "dbmate:rollback": "npx dbmate -d \"db/migrations\" -e \"DB\" rollback",
+    "oltp:new": "npx dbmate -d \"db/migrations_oltp\" -e \"OLTP\" new ",
+    "oltp:up": "npx dbmate -d \"db/migrations_oltp\" -e \"OLTP\" up",
+    "oltp:rollback": "npx dbmate -d \"db/migrations_oltp\" -e \"OLTP\" rollback",
+    "olap:new": "npx dbmate -d \"db/migrations_olap\" -e \"OLAP\" new ",
+    "olap:up": "npx dbmate -d \"db/migrations_olap\" -e \"OLAP\" up",
+    "olap:rollback": "npx dbmate -d \"db/migrations_olap\" -e \"OLAP\" rollback"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
@@ -26,6 +32,9 @@
     "sirv-cli": "^2.0.0",
     "svelte": "^3.59.2",
     "svelte-routing": "^2.13.0",
-    "sveltestrap": "^5.11.3"
+    "sveltestrap": "^5.11.3",
+    "dbmate": "^2.23.0",
+    "mysql": "^2.18.1",
+    "pg": "^8.13.1"
   }
 }
