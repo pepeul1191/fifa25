@@ -1,268 +1,532 @@
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
 
 --
--- Table structure for table `common_details`
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `common_details` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `overall` int DEFAULT NULL,
-  `velocity` int DEFAULT NULL,
-  `shooting` int DEFAULT NULL,
-  `passing` int DEFAULT NULL,
-  `dribbling` int DEFAULT NULL,
-  `defending` int DEFAULT NULL,
-  `physicality` int DEFAULT NULL,
-  `player_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `player_id` (`player_id`),
-  CONSTRAINT `common_details_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- *not* creating schema, since initdb creates it
+
 
 --
--- Table structure for table `foots`
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `foots` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(6) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+COMMENT ON SCHEMA public IS '';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
 
 --
--- Table structure for table `goalkeeper_details`
+-- Name: dim_foots; Type: TABLE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `goalkeeper_details` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `diving` int DEFAULT NULL,
-  `handling` int DEFAULT NULL,
-  `kicking` int DEFAULT NULL,
-  `positioning` int DEFAULT NULL,
-  `reflexes` int DEFAULT NULL,
-  `player_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `player_id` (`player_id`),
-  CONSTRAINT `goalkeeper_details_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE public.dim_foots (
+    id integer NOT NULL,
+    name character varying(8)
+);
+
 
 --
--- Table structure for table `leagues`
+-- Name: dim_foots_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `leagues` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL,
-  `nation_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `nation_id` (`nation_id`),
-  CONSTRAINT `leagues_ibfk_1` FOREIGN KEY (`nation_id`) REFERENCES `nations` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE SEQUENCE public.dim_foots_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 
 --
--- Table structure for table `nations`
+-- Name: dim_foots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `nations` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ALTER SEQUENCE public.dim_foots_id_seq OWNED BY public.dim_foots.id;
+
 
 --
--- Table structure for table `play_styles`
+-- Name: dim_goalkeeper_details; Type: TABLE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `play_styles` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE public.dim_goalkeeper_details (
+    id integer NOT NULL,
+    diving integer,
+    handling integer,
+    kicking integer,
+    positioning integer,
+    reflexes integer
+);
+
 
 --
--- Table structure for table `players`
+-- Name: dim_goalkeeper_details_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `players` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) DEFAULT NULL,
-  `ranking` int DEFAULT NULL,
-  `weak_foot` int DEFAULT NULL,
-  `skill_moves` int DEFAULT NULL,
-  `heigth` int DEFAULT NULL,
-  `weight` int DEFAULT NULL,
-  `age` int DEFAULT NULL,
-  `url` varchar(120) DEFAULT NULL,
-  `foot_id` int NOT NULL,
-  `sex_id` int NOT NULL,
-  `position_id` int NOT NULL,
-  `nation_id` int NOT NULL,
-  `team_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `foot_id` (`foot_id`),
-  KEY `sex_id` (`sex_id`),
-  KEY `position_id` (`position_id`),
-  KEY `nation_id` (`nation_id`),
-  KEY `team_id` (`team_id`),
-  CONSTRAINT `players_ibfk_1` FOREIGN KEY (`foot_id`) REFERENCES `foots` (`id`),
-  CONSTRAINT `players_ibfk_2` FOREIGN KEY (`sex_id`) REFERENCES `sexs` (`id`),
-  CONSTRAINT `players_ibfk_3` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`),
-  CONSTRAINT `players_ibfk_4` FOREIGN KEY (`nation_id`) REFERENCES `nations` (`id`),
-  CONSTRAINT `players_ibfk_5` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE SEQUENCE public.dim_goalkeeper_details_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 
 --
--- Table structure for table `players_play_styles`
+-- Name: dim_goalkeeper_details_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `players_play_styles` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `play_style_id` int NOT NULL,
-  `player_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `play_style_id` (`play_style_id`),
-  KEY `player_id` (`player_id`),
-  CONSTRAINT `players_play_styles_ibfk_1` FOREIGN KEY (`play_style_id`) REFERENCES `play_styles` (`id`),
-  CONSTRAINT `players_play_styles_ibfk_2` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ALTER SEQUENCE public.dim_goalkeeper_details_id_seq OWNED BY public.dim_goalkeeper_details.id;
+
 
 --
--- Table structure for table `players_positions`
+-- Name: dim_leagues; Type: TABLE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `players_positions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `position_id` int NOT NULL,
-  `player_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `position_id` (`position_id`),
-  KEY `player_id` (`player_id`),
-  CONSTRAINT `players_positions_ibfk_1` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`),
-  CONSTRAINT `players_positions_ibfk_2` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE public.dim_leagues (
+    id integer NOT NULL,
+    name character varying(40)
+);
+
 
 --
--- Table structure for table `positions`
+-- Name: dim_leagues_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `positions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE SEQUENCE public.dim_leagues_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 
 --
--- Table structure for table `schema_migrations`
+-- Name: dim_leagues_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `schema_migrations` (
-  `version` varchar(128) NOT NULL,
-  PRIMARY KEY (`version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+ALTER SEQUENCE public.dim_leagues_id_seq OWNED BY public.dim_leagues.id;
+
 
 --
--- Table structure for table `sexs`
+-- Name: dim_nations; Type: TABLE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `sexs` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(7) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE public.dim_nations (
+    id integer NOT NULL,
+    name character varying(40)
+);
+
 
 --
--- Table structure for table `teams`
+-- Name: dim_nations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teams` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(40) DEFAULT NULL,
-  `league_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `league_id` (`league_id`),
-  CONSTRAINT `teams_ibfk_1` FOREIGN KEY (`league_id`) REFERENCES `leagues` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE SEQUENCE public.dim_nations_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 
 --
--- Dumping routines for database 'oltp_fifa'
+-- Name: dim_nations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+ALTER SEQUENCE public.dim_nations_id_seq OWNED BY public.dim_nations.id;
 
--- Dump completed
+
+--
+-- Name: dim_players; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dim_players (
+    id integer NOT NULL,
+    name character varying(60),
+    weak_foot integer,
+    skill_moves integer,
+    height integer,
+    weight integer,
+    age integer,
+    url character varying(120)
+);
+
+
+--
+-- Name: dim_players_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.dim_players_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dim_players_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.dim_players_id_seq OWNED BY public.dim_players.id;
+
+
+--
+-- Name: dim_positions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dim_positions (
+    id integer NOT NULL,
+    name character varying(4)
+);
+
+
+--
+-- Name: dim_positions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.dim_positions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dim_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.dim_positions_id_seq OWNED BY public.dim_positions.id;
+
+
+--
+-- Name: dim_sexs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dim_sexs (
+    id integer NOT NULL,
+    name character varying(7)
+);
+
+
+--
+-- Name: dim_sexs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.dim_sexs_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dim_sexs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.dim_sexs_id_seq OWNED BY public.dim_sexs.id;
+
+
+--
+-- Name: dim_teams; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dim_teams (
+    id integer NOT NULL,
+    name character varying(40)
+);
+
+
+--
+-- Name: dim_teams_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.dim_teams_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dim_teams_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.dim_teams_id_seq OWNED BY public.dim_teams.id;
+
+
+--
+-- Name: fact_players; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.fact_players (
+    player_id integer,
+    team_id integer,
+    position_id integer,
+    nation_id integer,
+    foot_id integer,
+    sex_id integer,
+    goalkeeper_detail_id integer,
+    league_id integer,
+    nation_league_id integer,
+    ranking integer,
+    overall integer,
+    velocity integer,
+    shooting integer,
+    passing integer,
+    dribbling integer,
+    defending integer,
+    physicality integer
+);
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.schema_migrations (
+    version character varying(128) NOT NULL
+);
+
+
+--
+-- Name: dim_foots id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_foots ALTER COLUMN id SET DEFAULT nextval('public.dim_foots_id_seq'::regclass);
+
+
+--
+-- Name: dim_goalkeeper_details id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_goalkeeper_details ALTER COLUMN id SET DEFAULT nextval('public.dim_goalkeeper_details_id_seq'::regclass);
+
+
+--
+-- Name: dim_leagues id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_leagues ALTER COLUMN id SET DEFAULT nextval('public.dim_leagues_id_seq'::regclass);
+
+
+--
+-- Name: dim_nations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_nations ALTER COLUMN id SET DEFAULT nextval('public.dim_nations_id_seq'::regclass);
+
+
+--
+-- Name: dim_players id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_players ALTER COLUMN id SET DEFAULT nextval('public.dim_players_id_seq'::regclass);
+
+
+--
+-- Name: dim_positions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_positions ALTER COLUMN id SET DEFAULT nextval('public.dim_positions_id_seq'::regclass);
+
+
+--
+-- Name: dim_sexs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_sexs ALTER COLUMN id SET DEFAULT nextval('public.dim_sexs_id_seq'::regclass);
+
+
+--
+-- Name: dim_teams id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_teams ALTER COLUMN id SET DEFAULT nextval('public.dim_teams_id_seq'::regclass);
+
+
+--
+-- Name: dim_foots dim_foots_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_foots
+    ADD CONSTRAINT dim_foots_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dim_goalkeeper_details dim_goalkeeper_details_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_goalkeeper_details
+    ADD CONSTRAINT dim_goalkeeper_details_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dim_leagues dim_leagues_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_leagues
+    ADD CONSTRAINT dim_leagues_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dim_nations dim_nations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_nations
+    ADD CONSTRAINT dim_nations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dim_players dim_players_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_players
+    ADD CONSTRAINT dim_players_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dim_positions dim_positions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_positions
+    ADD CONSTRAINT dim_positions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dim_sexs dim_sexs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_sexs
+    ADD CONSTRAINT dim_sexs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dim_teams dim_teams_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dim_teams
+    ADD CONSTRAINT dim_teams_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: fact_players fact_players_foot_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_foot_id_fkey FOREIGN KEY (foot_id) REFERENCES public.dim_foots(id);
+
+
+--
+-- Name: fact_players fact_players_goalkeeper_detail_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_goalkeeper_detail_id_fkey FOREIGN KEY (goalkeeper_detail_id) REFERENCES public.dim_goalkeeper_details(id);
+
+
+--
+-- Name: fact_players fact_players_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_league_id_fkey FOREIGN KEY (league_id) REFERENCES public.dim_leagues(id);
+
+
+--
+-- Name: fact_players fact_players_nation_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_nation_id_fkey FOREIGN KEY (nation_id) REFERENCES public.dim_nations(id);
+
+
+--
+-- Name: fact_players fact_players_nation_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_nation_league_id_fkey FOREIGN KEY (nation_league_id) REFERENCES public.dim_nations(id);
+
+
+--
+-- Name: fact_players fact_players_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.dim_players(id);
+
+
+--
+-- Name: fact_players fact_players_position_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_position_id_fkey FOREIGN KEY (position_id) REFERENCES public.dim_positions(id);
+
+
+--
+-- Name: fact_players fact_players_sex_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_sex_id_fkey FOREIGN KEY (sex_id) REFERENCES public.dim_sexs(id);
+
+
+--
+-- Name: fact_players fact_players_team_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fact_players
+    ADD CONSTRAINT fact_players_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.dim_teams(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
 
 --
 -- Dbmate schema migrations
 --
 
-LOCK TABLES `schema_migrations` WRITE;
-INSERT INTO `schema_migrations` (version) VALUES
-  ('20240923001357'),
-  ('20240923001430'),
-  ('20240923001435'),
-  ('20240923001454'),
-  ('20240923001519'),
-  ('20240923001531'),
-  ('20240923001537'),
-  ('20240923001538'),
-  ('20240923001700'),
-  ('20240923001723'),
-  ('20240923001817'),
-  ('20240923001826'),
-  ('20241219172941');
-UNLOCK TABLES;
+INSERT INTO public.schema_migrations (version) VALUES
+    ('20241219184041'),
+    ('20241219184345'),
+    ('20241219184425'),
+    ('20241219184442'),
+    ('20241219184514'),
+    ('20241219184540'),
+    ('20241219184614'),
+    ('20241219185039'),
+    ('20241219185040');
