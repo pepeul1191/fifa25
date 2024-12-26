@@ -25,17 +25,6 @@ Migraciones con DBMATE - accesos/sqlite3:
 
 ---
 
-Fuentes:
+Integrantes:
 
-+ https://github.com/pepeul1191/flask-boilerplate-v2
-+ https://www.pylint.org/#install
-+ https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
-+ https://github.com/pepeul1191/python-bottle-boilerplate
-
-
----
-
-Fuentes:
-
-+ https://github.com/codzsword/bootstrap-admin-dashboard/tree/main
-+ https://www.youtube.com/watch?v=4VN8ZdDse9M
++ 
