@@ -1,19 +1,4 @@
-# This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
-
----
-
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+# Proyecto Construcción Dashboard Fifa25
 
 ### Descipción
 
@@ -24,50 +9,11 @@ En caso de usar el servicio en python:
     $ cd <<nombre_ambiente>>
     $ source bin/activate
 
-Arrancar aplicación con servidor Werkzeug:
-
-    $ cd <<carpeta-proyecto>>
-    $ pip install -r requirements.txt
-    $ python app.py
-
-Arrancer aplicación con servidor GreenUnicorn:
-
-    $ cd <<carpeta-proyecto>>
-    $ pip install -r requirements.txt
-    # Sin logs ni reload
-    $ gunicorn app:APP -w 6 -b 0.0.0.0:3000
-    # Con logs y reload
-    $ gunicorn app:APP -w 6 -b 0.0.0.0:3000 --reload --access-logfile -
-
-### PyLint
-
-    $ pylint <archivo>.py --reports=yes
-    $ pylint **/*.py --reports=yes
-
-### OAuth Responses
-
-https://www.googleapis.com/oauth2/v1/userinfo
-
-```
-{
-    "id": "7891273891273891273",
-    "email": "xyz@gmail.com",
-    "verified_email": true,
-    "name": "alkdjfa asdlfkjasdklf",
-    "given_name": "alkdjfa",
-    "family_name": "asdlfkjasdklf",
-    "picture": "https://lh3.googleusercontent.com/a-/AOh14GhaGAqhpkQfOw3DRemDILu_0aq2eTvfZdkGmRVe",
-    "locale": "es"
-}
-```
-
 ### .env
 
 Archivo <b>.env</b>
 
 DB="sqlite3:db/fifa25.db"
-DB_MYSQL="mysql://root:123@127.0.0.1:3306/oltp_fifa"
-DB_PG="postgres://root:123@127.0.0.1:5432/mart_olap_fifa?sslmode=disable"
 
 ### Migraciones
 

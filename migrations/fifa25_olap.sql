@@ -53,6 +53,8 @@ CREATE TABLE dim_leagues (
     name NVARCHAR(40) -- NVARCHAR para soporte Unicode; usar VARCHAR si Unicode no es necesario
 );
 
+DELETE FROM dim_leagues DBCC CHECKIDENT('dim_leagues', reseed,0)
+
 CREATE TABLE fact_players (
     player_id INT, -- INTEGER se convierte en INT en SQL Server
     team_id INT,
@@ -82,4 +84,4 @@ CREATE TABLE fact_players (
     CONSTRAINT fk_nation_league FOREIGN KEY (nation_league_id) REFERENCES dim_nation_leagues(id)
 );
 
-DELETE FROM fact_players DBCC CHECKIDENT('fact_players', reseed,0)
+DELETE FROM fact_players;
