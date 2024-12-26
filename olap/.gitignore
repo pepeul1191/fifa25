@@ -1,0 +1,25 @@
+# Ignorar carpetas de salida
+/bin/
+/obj/
+
+# Archivos temporales y de configuración específicos del usuario
+*.dtproj.user
+*.suo
+
+# Archivos de configuración y parámetros generados automáticamente
+*.conmgr
+*.params
+*.database
+
+# Otros archivos y carpetas temporales
+*.cache
+*.tmp
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar carpetas de Visual Studio
+.vscode/
+.idea/
