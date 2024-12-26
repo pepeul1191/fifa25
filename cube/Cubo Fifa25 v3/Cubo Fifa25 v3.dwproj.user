@@ -1,0 +1,29 @@
+<AnalysisServicesUserConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Configurations>
+    <Configuration>
+      <Name>Development</Name>
+      <Options>
+        <UserIDs>
+          <ConfigurationSetting>
+            <Id>Mart OLAP Fifa25v3</Id>
+            <Name>Mart OLAP Fifa25v3</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+I+2rBDBsE+eWpIhJFFmNQAAAAAmAAAATQBhAHIAdAAgAE8ATABBAFAAIABGAGkAZgBhADIANQB2ADMAAAAQZgAAAAEAACAAAACY1vEYI0p32QTgRoXizWVwmJwQl8no7KnbE7W5l3xexwAAAAAOgAAAAAIAACAAAAB+QvERKeSJdz2CaqIc0kvfuFbGzzoFna70+812HAAZRBAAAACWhb8dCaRkypK/KbwORwqtQAAAAOJRzSsSmBSjy3CgkNTG00I7/wEVgqRlH2b6lS1NQ9hPWdA5tHCzBiBf/HWnEa6vlsBtzs/q+PmdHCrt9NDqkMQ=</Value>
+          </ConfigurationSetting>
+        </UserIDs>
+        <UserPasswords>
+          <ConfigurationSetting>
+            <Id>Mart OLAP Fifa25v3</Id>
+            <Name>Mart OLAP Fifa25v3</Name>
+            <Value xsi:type="xsd:string">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA+I+2rBDBsE+eWpIhJFFmNQAAAAAmAAAATQBhAHIAdAAgAE8ATABBAFAAIABGAGkAZgBhADIANQB2ADMAAAAQZgAAAAEAACAAAACeTme3upvlCp0j9PgzWNSX22PlbRxoLxMnwGBuqRlHEwAAAAAOgAAAAAIAACAAAAA9nJzoYXuSfupNQufqPjQBxpRiKKHlhY7Ul53ArRXXqCAAAAC3H/kB35MSqb/TkBc/mBc9RZcNuHQ4JFwEl+x1JKPukkAAAACdlad426P2eWgiRfqrWYnJNyxblWkN9RvVMV14D97i6J448n8zz8OroslXdQaxHWqluD1qo/P4+yRxJ/bUWz6j</Value>
+          </ConfigurationSetting>
+        </UserPasswords>
+        <TargetServer>localhost</TargetServer>
+        <TargetDatabase>Cubo Fifa25 v3</TargetDatabase>
+        <StartObject>
+          <ObjectId></ObjectId>
+          <ObjectType>Current</ObjectType>
+        </StartObject>
+      </Options>
+    </Configuration>
+  </Configurations>
+</AnalysisServicesUserConfiguration>
